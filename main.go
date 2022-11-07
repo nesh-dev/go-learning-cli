@@ -21,7 +21,7 @@ func main() {
 
 	greetUsers()
 
-	for  remainingTickets > 0 && len(bookings) < 50 {
+	for {
 		
 
 		firstName, lastName, email, userTickets := getUserInput()
@@ -29,6 +29,7 @@ func main() {
 		if isValidName && isValidEmail && isValidTicket {
 		
 			bookTicket(userTickets, firstName, lastName, email)
+			sendTickets(userTickets, firstName, lastName, email)
 		
 			firstNames := getFirstNames()
 			fmt.Printf("The first names of the bookings are %v \n", firstNames)
@@ -112,11 +113,20 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 		userTickets: userTickets,
 	}
 
-	
+
 
 	bookings = append(bookings, userData)
 	fmt.Printf("The list of bookings is %v \n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking  %v tickets. You will receive a confirmation email at %v \n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickects remaining for %v\n", remainingTickets, conferenceName)
+}
+
+func sendTickets(userTickets uint, firstName string, lastName string, email string,){ 
+	var ticket = fmt.Sprintf("%v tickets for %v %v \n", userTickets, firstName, lastName)
+
+	fmt.Println("##############")
+	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticket, email)
+	fmt.Println("##############")
+
 }
